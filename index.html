@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La nostra serra — Infanzia Primavera</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      background: linear-gradient(180deg, #e3f2fd 0%, #e8f5e9 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      gap: 1.2rem;
+    }
+    .titolo { font-size: 2.2rem; font-weight: 500; color: #0d47a1; }
+    .sottotitolo { font-size: 1.4rem; color: #1565c0; font-weight: 500; margin-top: -0.8rem; }
+
+    .serra-btn {
+      cursor: pointer; border: none; background: none; padding: 0;
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    }
+    .serra-svg { width: 300px; height: 260px; transition: transform 0.15s; }
+    .serra-btn:hover .serra-svg { transform: scale(1.04); }
+    .serra-btn:active .serra-svg { transform: scale(0.95); }
+
+    .pianta1 { animation: ondeggia 3s ease-in-out infinite; transform-origin: 72px 145px; }
+    .pianta2 { animation: ondeggia 3s ease-in-out 0.7s infinite; transform-origin: 150px 145px; }
+    .pianta3 { animation: ondeggia 3s ease-in-out 1.4s infinite; transform-origin: 228px 145px; }
+    @keyframes ondeggia { 0%,100%{transform:rotate(0deg)} 50%{transform:rotate(5deg)} }
+
+    .bolla1 { animation: sali 2.5s ease-in infinite; }
+    .bolla2 { animation: sali 2.5s ease-in 0.8s infinite; }
+    .bolla3 { animation: sali 2.5s ease-in 1.6s infinite; }
+    @keyframes sali { 0%{transform:translateY(0);opacity:0.7} 100%{transform:translateY(-35px);opacity:0} }
+
+    .acqua { animation: onda 2s ease-in-out infinite; }
+    @keyframes onda { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-3px)} }
+
+    .freccia { font-size: 2.8rem; animation: saltella 0.9s ease-in-out infinite; }
+    @keyframes saltella { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+    .testo-tocca { font-size: 1.6rem; color: #1565c0; font-weight: 500; }
+
+    .risposta-box {
+      min-height: 160px; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; width: 100%;
+    }
+    .emoji-risposta { font-size: 9rem; animation: popIn 0.4s cubic-bezier(0.34,1.56,0.64,1); }
+    @keyframes popIn { from{transform:scale(0);opacity:0} to{transform:scale(1);opacity:1} }
+    .testo-risposta { font-size: 1.8rem; color: #0d47a1; font-weight: 500; margin-top: 0.8rem; max-width: 360px; line-height: 1.4; }
+
+    .loading-emoji { font-size: 4rem; animation: gira 1s linear infinite; }
+    @keyframes gira { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+
+    .dati-box {
+      background: white; border-radius: 20px; padding: 0.8rem 2rem;
+      font-size: 1.3rem; color: #1565c0; font-weight: 500; border: 2px solid #90caf9;
+    }
+    .attesa { font-size: 1.4rem; color: #64b5f6; font-weight: 500; }
+  </style>
+</head>
+<body>
+  <h1 class="titolo">La nostra serra</h1>
+  <p class="sottotitolo">Infanzia Primavera 🌿</p>
+
+  <button class="serra-btn" onclick="chiediStato()" aria-label="Tocca la serra per sapere come stanno le piante">
+    <svg class="serra-svg" viewBox="0 0 300 260" xmlns="http://www.w3.org/2000/svg">
+      <rect x="15" y="55" width="270" height="190" rx="12" fill="#e3f2fd" stroke="#90caf9" stroke-width="3"/>
+      <path d="M15 65 L150 10 L285 65" fill="#bbdefb" stroke="#64b5f6" stroke-width="3"/>
+      <line x1="150" y1="10" x2="150" y2="65" stroke="#64b5f6" stroke-width="2"/>
+      <rect x="30" y="170" width="240" height="60" rx="8" fill="#1565c0" opacity="0.12"/>
+      <rect class="acqua" x="30" y="168" width="240" height="18" rx="4" fill="#42a5f5" opacity="0.5"/>
+      <rect x="25" y="158" width="250" height="14" rx="7" fill="#90caf9" stroke="#64b5f6" stroke-width="1.5"/>
+      <circle cx="72" cy="165" r="5" fill="#e3f2fd" stroke="#42a5f5" stroke-width="1.5"/>
+      <circle cx="150" cy="165" r="5" fill="#e3f2fd" stroke="#42a5f5" stroke-width="1.5"/>
+      <circle cx="228" cy="165" r="5" fill="#e3f2fd" stroke="#42a5f5" stroke-width="1.5"/>
+      <path d="M69 170 Q65 188 62 205" stroke="#a5d6a7" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M75 170 Q79 188 81 205" stroke="#a5d6a7" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M147 170 Q143 188 140 205" stroke="#a5d6a7" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M153 170 Q157 188 159 205" stroke="#a5d6a7" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M225 170 Q221 188 218 205" stroke="#a5d6a7" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M231 170 Q235 188 237 205" stroke="#a5d6a7" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <circle class="bolla1" cx="78" cy="200" r="4" fill="#64b5f6" opacity="0.6"/>
+      <circle class="bolla2" cx="155" cy="195" r="3" fill="#64b5f6" opacity="0.6"/>
+      <circle class="bolla3" cx="224" cy="200" r="4" fill="#64b5f6" opacity="0.6"/>
+      <g class="pianta1">
+        <rect x="66" y="100" width="12" height="60" rx="5" fill="#388e3c"/>
+        <ellipse cx="72" cy="88" rx="28" ry="34" fill="#43a047"/>
+        <ellipse cx="52" cy="102" rx="17" ry="10" fill="#66bb6a" transform="rotate(-30 52 102)"/>
+        <ellipse cx="92" cy="102" rx="17" ry="10" fill="#66bb6a" transform="rotate(30 92 102)"/>
+        <circle cx="65" cy="80" r="5" fill="white"/><circle cx="65" cy="81" r="3" fill="#1b5e20"/>
+        <circle cx="79" cy="80" r="5" fill="white"/><circle cx="79" cy="81" r="3" fill="#1b5e20"/>
+        <path d="M63 90 Q72 98 81 90" stroke="#1b5e20" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <circle cx="58" cy="85" r="5" fill="#ffcdd2" opacity="0.6"/>
+        <circle cx="86" cy="85" r="5" fill="#ffcdd2" opacity="0.6"/>
+      </g>
+      <g class="pianta2">
+        <rect x="144" y="90" width="12" height="70" rx="5" fill="#2e7d32"/>
+        <ellipse cx="150" cy="75" rx="34" ry="40" fill="#2e7d32"/>
+        <ellipse cx="124" cy="93" rx="20" ry="12" fill="#43a047" transform="rotate(-25 124 93)"/>
+        <ellipse cx="176" cy="93" rx="20" ry="12" fill="#43a047" transform="rotate(25 176 93)"/>
+        <circle cx="142" cy="66" r="6" fill="white"/><circle cx="142" cy="67" r="4" fill="#1b5e20"/>
+        <circle cx="158" cy="66" r="6" fill="white"/><circle cx="158" cy="67" r="4" fill="#1b5e20"/>
+        <path d="M139 78 Q150 88 161 78" stroke="#1b5e20" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <circle cx="133" cy="72" r="7" fill="#ffcdd2" opacity="0.6"/>
+        <circle cx="167" cy="72" r="7" fill="#ffcdd2" opacity="0.6"/>
+      </g>
+      <g class="pianta3">
+        <rect x="222" y="100" width="12" height="60" rx="5" fill="#388e3c"/>
+        <ellipse cx="228" cy="88" rx="28" ry="34" fill="#388e3c"/>
+        <ellipse cx="208" cy="102" rx="17" ry="10" fill="#66bb6a" transform="rotate(-30 208 102)"/>
+        <ellipse cx="248" cy="102" rx="17" ry="10" fill="#66bb6a" transform="rotate(30 248 102)"/>
+        <circle cx="221" cy="80" r="5" fill="white"/><circle cx="221" cy="81" r="3" fill="#1b5e20"/>
+        <circle cx="235" cy="80" r="5" fill="white"/><circle cx="235" cy="81" r="3" fill="#1b5e20"/>
+        <path d="M219 90 Q228 98 237 90" stroke="#1b5e20" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <circle cx="214" cy="85" r="5" fill="#ffcdd2" opacity="0.6"/>
+        <circle cx="242" cy="85" r="5" fill="#ffcdd2" opacity="0.6"/>
+      </g>
+      <rect x="255" y="80" width="24" height="44" rx="4" fill="#fff9c4" stroke="#f9a825" stroke-width="1.5"/>
+      <text x="267" y="100" font-size="12" text-anchor="middle" fill="#e65100">🌡️</text>
+      <text x="267" y="116" font-size="8" text-anchor="middle" fill="#e65100">DHT22</text>
+    </svg>
+    <div class="freccia">👆</div>
+    <p class="testo-tocca">Tocca per scoprire!</p>
+  </button>
+
+  <div class="risposta-box" id="risposta-box" aria-live="polite">
+    <p class="attesa">Tocca la serra per sapere come stanno le piante! 🌱</p>
+  </div>
+
+  <div class="dati-box" id="dati-box" style="display:none">
+    🌡️ <strong id="temp-val">--</strong>°C &nbsp;|&nbsp; 💧 <strong id="hum-val">--</strong>%
+  </div>
+
+  <script>
+    async function chiediStato() {
+      const box = document.getElementById('risposta-box');
+      const datiBox = document.getElementById('dati-box');
+      box.innerHTML = '<div class="loading-emoji">⏳</div>';
+      try {
+        // Questa riga chiama il server Node.js
+        const res = await fetch('/stato-pianta');
+        const data = await res.json();
+        document.getElementById('temp-val').textContent = data.temperatura || '--';
+        document.getElementById('hum-val').textContent = data.umidita_aria || '--';
+        datiBox.style.display = 'block';
+        box.innerHTML = `
+         <div class="emoji-risposta">${data.emoji}</div>
+          <p class="testo-risposta">${data.messaggio}</p>
+        `;
+      } catch(e) {
+        box.innerHTML = '<div class="emoji-risposta">😴</div><p class="testo-risposta">Il server non è ancora connesso</p>';
+      }
+    }
+  </script>
+</body>
+</html>
