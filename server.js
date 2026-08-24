@@ -37,7 +37,7 @@ app.get('/stato-pianta', (req, res) => {
   // Regole semplici per i test (senza AI per ora)
   let emoji, messaggio;
 
-  if (temp > 30) {
+  if (temp > 28) {
     emoji = '🌡️😰';
     messaggio = 'Ho troppo caldo!';
   } else if (temp < 15) {
